@@ -1,17 +1,18 @@
 import HTMLFlipBook from 'react-pageflip'
-import { forwardRef } from 'react'
+import { forwardRef, useRef } from 'react'
 import Cover from './Cover'
 import Page from './Page'
 import pages from '../data/pages.json'
 import './Book.css'
 
-// End papers flank the cover and back — needed so every spread has two pages
 const EndPaper = forwardRef((props, ref) => (
   <div ref={ref} className="end-paper" />
 ))
 EndPaper.displayName = 'EndPaper'
 
 export default function Book() {
+  const bookRef = useRef()
+
   let slot = 1
   const pageSlots = pages.map(page => {
     const start = slot
@@ -19,43 +20,76 @@ export default function Book() {
     return start
   })
 
-  // Each page is half the spread; leave 48px for #root padding (24px each side)
-  const pageWidth = Math.min(400, Math.floor((window.innerWidth - 48) / 2))
-  const pageHeight = Math.floor(pageWidth * 1.375)
+  const pageWidth = Math.min(380, Math.floor((window.innerWidth - 80) / 2))
+  const pageHeight = Math.floor(pageWidth * 1.38)
+
+  const onPrev = () => bookRef.current?.pageFlip().flipPrev()
+  const onNext = () => bookRef.current?.pageFlip().flipNext()
 
   return (
-    <div className="book-container">
-      <HTMLFlipBook
-        width={pageWidth}
-        height={pageHeight}
-        size="fixed"
-        minWidth={250}
-        maxWidth={400}
-        minHeight={340}
-        maxHeight={550}
-        mobileScrollSupport={true}
-        className="book"
-        flippingTime={800}
-        useMouseEvents={true}
-      >
-        {/* End paper on left, Cover on right — opening spread */}
-        <EndPaper />
-        <Cover
-          type="front"
-          title="Happy Birthday!"
-          subtitle="A little book of memories"
-        />
+    <div className="scrapbook-scene">
 
-        {pages.map((pageData, i) => (
-          <Page key={i} pageData={pageData} startSlot={pageSlots[i]} />
-        ))}
+      {/* Desk items — left side */}
+      <span className="deco d-camera">📷</span>
+      <span className="deco d-daisy">🌼</span>
+      <span className="deco d-heart1">💕</span>
+      <span className="deco d-flower1">🌸</span>
+      <span className="deco d-letter">💌</span>
 
-        {/* Back cover on left, end paper on right — closing spread */}
-        <Cover type="back" title="" subtitle="" />
-        <EndPaper />
-      </HTMLFlipBook>
+      {/* Desk items — right side */}
+      <span className="deco d-pen">✒️</span>
+      <span className="deco d-rose">🌹</span>
+      <span className="deco d-heart2">🩷</span>
+      <span className="deco d-sunflower">🌻</span>
+      <span className="deco d-scroll">📜</span>
 
-      <p className="book-hint">Click or drag the page edges to flip</p>
+      {/* Desk items — top */}
+      <span className="deco d-washi">🎀</span>
+      <span className="deco d-star1">✨</span>
+      <span className="deco d-star2">⭐</span>
+
+      {/* Desk items — bottom */}
+      <span className="deco d-flower2">🌺</span>
+      <span className="deco d-heart3">❤️</span>
+      <span className="deco d-sparkle">💫</span>
+
+      <div className="book-stage">
+        <HTMLFlipBook
+          ref={bookRef}
+          width={pageWidth}
+          height={pageHeight}
+          size="fixed"
+          minWidth={200}
+          maxWidth={380}
+          minHeight={276}
+          maxHeight={524}
+          mobileScrollSupport={true}
+          className="flip-book"
+          flippingTime={900}
+          useMouseEvents={true}
+        >
+          {/* End paper + front cover as opening spread */}
+          <EndPaper />
+          <Cover
+            type="front"
+            title="Happy Birthday!"
+            subtitle="We've 26 adventures ✨"
+          />
+
+          {pages.map((pageData, i) => (
+            <Page key={i} pageData={pageData} startSlot={pageSlots[i]} pageIndex={i} />
+          ))}
+
+          {/* Back cover + end paper as closing spread */}
+          <Cover type="back" title="" subtitle="" />
+          <EndPaper />
+        </HTMLFlipBook>
+      </div>
+
+      <nav className="book-nav">
+        <button className="nav-btn nav-prev" onClick={onPrev}>← Prev</button>
+        <button className="nav-btn nav-next" onClick={onNext}>Next →</button>
+      </nav>
     </div>
   )
 }

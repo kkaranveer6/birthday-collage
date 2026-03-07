@@ -2,14 +2,41 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
+  position: relative; /* for washi tape pseudo-element */
+}
+
+/* Washi tape strip across the top of the polaroid */
+.photo-slot::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-3deg);
+  width: 52px;
+  height: 16px;
+  background: rgba(255, 182, 193, 0.65);
+  border-top: 1px dashed rgba(255,255,255,0.5);
+  border-bottom: 1px dashed rgba(255,255,255,0.5);
+  z-index: 5;
+  border-radius: 1px;
+}
+
+/* Alternate washi tape color per even slots */
+.photo-slot:nth-child(even)::before {
+  background: rgba(255, 230, 140, 0.65);
+  transform: translateX(-50%) rotate(2deg);
+  width: 44px;
 }
 
 .polaroid {
   background: #fff;
-  padding: 8px 8px 28px 8px;
-  box-shadow: 2px 4px 12px rgba(0,0,0,0.25);
-  border: 1px solid #e8e0d0;
+  padding: 10px 10px 40px 10px; /* thick Polaroid bottom */
+  box-shadow:
+    0 4px 14px rgba(0,0,0,0.22),
+    0 1px 4px rgba(0,0,0,0.12),
+    inset 0 0 0 1px rgba(0,0,0,0.04);
+  position: relative;
 }
 
 .photo-img {
@@ -26,15 +53,21 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 2rem;
+  font-size: 2.2rem;
   color: #a89880;
   font-family: 'Caveat', cursive;
 }
 
+/* Caption below the polaroid — handwritten label style */
 .photo-caption {
   font-family: 'Caveat', cursive;
   font-size: 1rem;
-  color: #5a4a3a;
+  font-weight: 600;
+  color: #5a3e2b;
   text-align: center;
   margin: 0;
+  letter-spacing: 0.01em;
+  /* Slight underline like a written annotation */
+  border-bottom: 1px solid rgba(90,62,43,0.25);
+  padding-bottom: 1px;
 }

@@ -1,19 +1,100 @@
-.book-container {
+/* ── Scene ─────────────────────────────────────── */
+.scrapbook-scene {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
+  gap: 18px;
+  /* Padding creates the visible desk area around the book */
+  padding: 70px 130px 80px 130px;
 }
 
-.book-hint {
-  font-family: 'Caveat', cursive;
-  font-size: 1rem;
-  color: #a89880;
-  margin: 0;
+/* ── Book ───────────────────────────────────────── */
+.book-stage {
+  position: relative;
+  filter: drop-shadow(0 24px 48px rgba(0,0,0,0.55));
 }
 
 .end-paper {
   width: 100%;
   height: 100%;
-  background: linear-gradient(145deg, #7a5230, #5c3a1e);
+  background:
+    repeating-linear-gradient(
+      90deg,
+      transparent 0px, transparent 3px,
+      rgba(255,255,255,0.03) 3px, rgba(255,255,255,0.03) 4px
+    ),
+    linear-gradient(160deg, #7A5230 0%, #5C3A1E 100%);
 }
+
+/* ── Desk Decorations ───────────────────────────── */
+.deco {
+  position: absolute;
+  font-size: 2rem;
+  user-select: none;
+  pointer-events: none;
+  filter: drop-shadow(2px 4px 5px rgba(0,0,0,0.35));
+  line-height: 1;
+}
+
+/* Left side */
+.d-camera  { bottom: 50px;  left: 18px;  font-size: 3.2rem; transform: rotate(-20deg); }
+.d-daisy   { top: 50%;      left: 22px;  transform: translateY(-50%) rotate(12deg); }
+.d-heart1  { top: 30%;      left: 40px;  font-size: 1.6rem; transform: rotate(-8deg); }
+.d-flower1 { bottom: 110px; left: 50px;  font-size: 2.2rem; transform: rotate(5deg); }
+.d-letter  { bottom: 20px;  left: 60px;  font-size: 2.4rem; transform: rotate(10deg); }
+
+/* Right side */
+.d-pen       { top: 42%;     right: 18px; font-size: 2.6rem; transform: translateY(-50%) rotate(30deg); }
+.d-rose      { top: 28%;     right: 45px; font-size: 2.4rem; transform: rotate(-8deg); }
+.d-heart2    { bottom: 35%;  right: 30px; font-size: 1.6rem; transform: rotate(6deg); }
+.d-sunflower { bottom: 100px;right: 50px; font-size: 2.2rem; transform: rotate(-5deg); }
+.d-scroll    { bottom: 20px; right: 55px; font-size: 2rem;   transform: rotate(-12deg); }
+
+/* Top */
+.d-washi { top: 18px; right: 90px; font-size: 2.4rem; transform: rotate(-15deg); }
+.d-star1 { top: 22px; left: 50%;   font-size: 1.8rem; transform: translateX(-60px) rotate(10deg); }
+.d-star2 { top: 28px; left: 50%;   font-size: 1.4rem; transform: translateX(40px) rotate(-5deg); }
+
+/* Bottom */
+.d-flower2  { bottom: 22px; left: 50%;  font-size: 2rem;   transform: translateX(-80px) rotate(-10deg); }
+.d-heart3   { bottom: 18px; left: 50%;  font-size: 1.8rem; transform: translateX(20px) rotate(8deg); }
+.d-sparkle  { bottom: 30px; left: 50%;  font-size: 1.6rem; transform: translateX(70px) rotate(-5deg); }
+
+/* ── Navigation ─────────────────────────────────── */
+.book-nav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.nav-btn {
+  background: #FEF6E4;
+  border: none;
+  padding: 8px 22px 10px;
+  font-family: 'Caveat', cursive;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #5a3e2b;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+  position: relative;
+  /* Torn paper top and bottom edges */
+  clip-path: polygon(
+    0% 15%, 3% 0%, 8% 12%, 13% 2%, 18% 10%, 24% 0%,
+    30% 8%, 36% 0%, 42% 10%, 48% 1%, 54% 9%, 60% 0%,
+    66% 11%, 72% 2%, 78% 10%, 84% 0%, 90% 8%, 96% 0%, 100% 12%,
+    100% 85%, 97% 100%, 91% 88%, 85% 100%, 79% 90%, 73% 100%,
+    67% 88%, 61% 100%, 55% 90%, 49% 100%, 43% 88%, 37% 100%,
+    31% 90%, 25% 100%, 19% 88%, 13% 100%, 7% 88%, 0% 100%
+  );
+  box-shadow: 1px 2px 8px rgba(0,0,0,0.2);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.nav-btn:hover {
+  transform: scale(1.06) rotate(-1.5deg);
+  box-shadow: 2px 4px 12px rgba(0,0,0,0.25);
+}
+
+.nav-prev:hover { transform: scale(1.06) rotate(1.5deg); }
