@@ -12,16 +12,20 @@ export default function Book() {
     return start
   })
 
+  // Each page is half the spread; leave 48px for #root padding (24px each side)
+  const pageWidth = Math.min(400, Math.floor((window.innerWidth - 48) / 2))
+  const pageHeight = Math.floor(pageWidth * 1.375) // maintain 400:550 ratio
+
   return (
     <div className="book-container">
       <HTMLFlipBook
-        width={400}
-        height={550}
+        width={pageWidth}
+        height={pageHeight}
         size="fixed"
-        minWidth={300}
-        maxWidth={600}
-        minHeight={400}
-        maxHeight={750}
+        minWidth={250}
+        maxWidth={400}
+        minHeight={340}
+        maxHeight={550}
         showCover={true}
         mobileScrollSupport={true}
         className="book"
