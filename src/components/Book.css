@@ -1,0 +1,13 @@
+.book-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.book-hint {
+  font-family: 'Caveat', cursive;
+  font-size: 1rem;
+  color: #a89880;
+  margin: 0;
+}
