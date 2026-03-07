@@ -1,17 +1,18 @@
 /* ── Scene ─────────────────────────────────────── */
 .scrapbook-scene {
-  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 18px;
-  /* Padding creates the visible desk area around the book */
-  padding: 70px 130px 80px 130px;
+  /* Just enough vertical padding for top/bottom decos */
+  padding: 60px 0 70px;
 }
 
-/* ── Book ───────────────────────────────────────── */
+/* ── Book stage — decos are anchored here ───────── */
 .book-stage {
   position: relative;
+  /* overflow visible so decos that extend outside the book are shown */
+  overflow: visible;
   filter: drop-shadow(0 24px 48px rgba(0,0,0,0.55));
 }
 
@@ -27,7 +28,7 @@
     linear-gradient(160deg, #7A5230 0%, #5C3A1E 100%);
 }
 
-/* ── Desk Decorations ───────────────────────────── */
+/* ── Decorations — all relative to .book-stage ──── */
 .deco {
   position: absolute;
   font-size: 2rem;
@@ -35,31 +36,32 @@
   pointer-events: none;
   filter: drop-shadow(2px 4px 5px rgba(0,0,0,0.35));
   line-height: 1;
+  z-index: 10;
 }
 
-/* Left side */
-.d-camera  { bottom: 50px;  left: 18px;  font-size: 3.2rem; transform: rotate(-20deg); }
-.d-daisy   { top: 50%;      left: 22px;  transform: translateY(-50%) rotate(12deg); }
-.d-heart1  { top: 30%;      left: 40px;  font-size: 1.6rem; transform: rotate(-8deg); }
-.d-flower1 { bottom: 110px; left: 50px;  font-size: 2.2rem; transform: rotate(5deg); }
-.d-letter  { bottom: 20px;  left: 60px;  font-size: 2.4rem; transform: rotate(10deg); }
+/* Left side — negative left values go beyond the book edge */
+.d-camera  { bottom: 30px;  left: -85px;  font-size: 3rem;  transform: rotate(-20deg); }
+.d-daisy   { top: 40%;      left: -60px;  font-size: 2rem;  transform: rotate(10deg);  }
+.d-heart1  { top: 25%;      left: -45px;  font-size: 1.5rem;transform: rotate(-8deg);  }
+.d-flower1 { bottom: 80px;  left: -55px;  font-size: 2.2rem;transform: rotate(5deg);   }
+.d-letter  { bottom: -10px; left: -40px;  font-size: 2.2rem;transform: rotate(12deg);  }
 
-/* Right side */
-.d-pen       { top: 42%;     right: 18px; font-size: 2.6rem; transform: translateY(-50%) rotate(30deg); }
-.d-rose      { top: 28%;     right: 45px; font-size: 2.4rem; transform: rotate(-8deg); }
-.d-heart2    { bottom: 35%;  right: 30px; font-size: 1.6rem; transform: rotate(6deg); }
-.d-sunflower { bottom: 100px;right: 50px; font-size: 2.2rem; transform: rotate(-5deg); }
-.d-scroll    { bottom: 20px; right: 55px; font-size: 2rem;   transform: rotate(-12deg); }
+/* Right side — positive right values beyond book edge */
+.d-pen       { top: 40%;     right: -60px; font-size: 2.4rem;transform: translateY(-50%) rotate(25deg); }
+.d-rose      { top: 20%;     right: -55px; font-size: 2.2rem;transform: rotate(-8deg);  }
+.d-heart2    { bottom: 30%;  right: -40px; font-size: 1.5rem;transform: rotate(6deg);   }
+.d-sunflower { bottom: 80px; right: -60px; font-size: 2rem;  transform: rotate(-5deg);  }
+.d-scroll    { bottom: -5px; right: -50px; font-size: 1.8rem;transform: rotate(-12deg); }
 
-/* Top */
-.d-washi { top: 18px; right: 90px; font-size: 2.4rem; transform: rotate(-15deg); }
-.d-star1 { top: 22px; left: 50%;   font-size: 1.8rem; transform: translateX(-60px) rotate(10deg); }
-.d-star2 { top: 28px; left: 50%;   font-size: 1.4rem; transform: translateX(40px) rotate(-5deg); }
+/* Top — negative top values above the book */
+.d-washi { top: -45px; right: 60px;  font-size: 2.2rem;transform: rotate(-15deg); }
+.d-star1 { top: -40px; left: 45%;   font-size: 1.6rem;transform: translateX(-50%) rotate(10deg); }
+.d-star2 { top: -30px; right: 30%;  font-size: 1.3rem;transform: rotate(-5deg);  }
 
-/* Bottom */
-.d-flower2  { bottom: 22px; left: 50%;  font-size: 2rem;   transform: translateX(-80px) rotate(-10deg); }
-.d-heart3   { bottom: 18px; left: 50%;  font-size: 1.8rem; transform: translateX(20px) rotate(8deg); }
-.d-sparkle  { bottom: 30px; left: 50%;  font-size: 1.6rem; transform: translateX(70px) rotate(-5deg); }
+/* Bottom — below the book */
+.d-flower2 { bottom: -40px; left: 25%;  font-size: 1.8rem;transform: rotate(-10deg); }
+.d-heart3  { bottom: -35px; left: 50%;  font-size: 1.6rem;transform: translateX(-50%) rotate(8deg); }
+.d-sparkle { bottom: -30px; right: 28%; font-size: 1.4rem;transform: rotate(-5deg);  }
 
 /* ── Navigation ─────────────────────────────────── */
 .book-nav {
@@ -78,8 +80,6 @@
   color: #5a3e2b;
   cursor: pointer;
   letter-spacing: 0.02em;
-  position: relative;
-  /* Torn paper top and bottom edges */
   clip-path: polygon(
     0% 15%, 3% 0%, 8% 12%, 13% 2%, 18% 10%, 24% 0%,
     30% 8%, 36% 0%, 42% 10%, 48% 1%, 54% 9%, 60% 0%,

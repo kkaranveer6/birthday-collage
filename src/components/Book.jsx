@@ -20,7 +20,8 @@ export default function Book() {
     return start
   })
 
-  const pageWidth = Math.min(380, Math.floor((window.innerWidth - 80) / 2))
+  // Subtract 200px: 90px scene padding each side + 20px safety buffer
+  const pageWidth = Math.max(200, Math.min(380, Math.floor((window.innerWidth - 200) / 2)))
   const pageHeight = Math.floor(pageWidth * 1.38)
 
   const onPrev = () => bookRef.current?.pageFlip().flipPrev()
@@ -28,32 +29,26 @@ export default function Book() {
 
   return (
     <div className="scrapbook-scene">
-
-      {/* Desk items — left side */}
-      <span className="deco d-camera">📷</span>
-      <span className="deco d-daisy">🌼</span>
-      <span className="deco d-heart1">💕</span>
-      <span className="deco d-flower1">🌸</span>
-      <span className="deco d-letter">💌</span>
-
-      {/* Desk items — right side */}
-      <span className="deco d-pen">✒️</span>
-      <span className="deco d-rose">🌹</span>
-      <span className="deco d-heart2">🩷</span>
-      <span className="deco d-sunflower">🌻</span>
-      <span className="deco d-scroll">📜</span>
-
-      {/* Desk items — top */}
-      <span className="deco d-washi">🎀</span>
-      <span className="deco d-star1">✨</span>
-      <span className="deco d-star2">⭐</span>
-
-      {/* Desk items — bottom */}
-      <span className="deco d-flower2">🌺</span>
-      <span className="deco d-heart3">❤️</span>
-      <span className="deco d-sparkle">💫</span>
-
       <div className="book-stage">
+
+        {/* Decorations positioned relative to the book itself */}
+        <span className="deco d-camera">📷</span>
+        <span className="deco d-daisy">🌼</span>
+        <span className="deco d-heart1">💕</span>
+        <span className="deco d-flower1">🌸</span>
+        <span className="deco d-letter">💌</span>
+        <span className="deco d-pen">✒️</span>
+        <span className="deco d-rose">🌹</span>
+        <span className="deco d-heart2">🩷</span>
+        <span className="deco d-sunflower">🌻</span>
+        <span className="deco d-scroll">📜</span>
+        <span className="deco d-washi">🎀</span>
+        <span className="deco d-star1">✨</span>
+        <span className="deco d-star2">⭐</span>
+        <span className="deco d-flower2">🌺</span>
+        <span className="deco d-heart3">❤️</span>
+        <span className="deco d-sparkle">💫</span>
+
         <HTMLFlipBook
           ref={bookRef}
           width={pageWidth}
@@ -68,7 +63,6 @@ export default function Book() {
           flippingTime={900}
           useMouseEvents={true}
         >
-          {/* End paper + front cover as opening spread */}
           <EndPaper />
           <Cover
             type="front"
@@ -80,7 +74,6 @@ export default function Book() {
             <Page key={i} pageData={pageData} startSlot={pageSlots[i]} pageIndex={i} />
           ))}
 
-          {/* Back cover + end paper as closing spread */}
           <Cover type="back" title="" subtitle="" />
           <EndPaper />
         </HTMLFlipBook>
