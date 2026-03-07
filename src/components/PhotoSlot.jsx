@@ -7,11 +7,17 @@ export default function PhotoSlot({ filename, caption, slotNumber, onPhotoClick 
     onPhotoClick(filename, caption)
   }
 
+  // react-pageflip triggers on mousedown/pointerdown — stop those too
+  const stopBubble = filename ? (e) => e.stopPropagation() : undefined
+
   return (
     <div className="photo-slot">
       <div
         className={`polaroid${filename ? ' polaroid--clickable' : ''}`}
         onClick={handleClick}
+        onMouseDown={stopBubble}
+        onPointerDown={stopBubble}
+        onTouchStart={stopBubble}
       >
         {filename ? (
           <img src={`/images/${filename}`} alt={caption || ''} className="photo-img" />
