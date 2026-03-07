@@ -10,13 +10,12 @@ const DECO_SETS = [
   ['✨', '🌺', '💫', '🌼', '❤️'],
 ]
 
-const Page = forwardRef(({ pageData, startSlot, pageIndex = 0 }, ref) => {
+const Page = forwardRef(({ pageData, startSlot, pageIndex = 0, onPhotoClick }, ref) => {
   const { layout, images, captions } = pageData
   const decos = DECO_SETS[pageIndex % DECO_SETS.length]
 
   return (
     <div className={`page page-${layout}`} ref={ref} data-idx={pageIndex}>
-      {/* Scattered page decorations */}
       <span className="pdeco pdeco-tl" aria-hidden="true">{decos[0]}</span>
       <span className="pdeco pdeco-tr" aria-hidden="true">{decos[1]}</span>
       <span className="pdeco pdeco-bl" aria-hidden="true">{decos[2]}</span>
@@ -30,6 +29,7 @@ const Page = forwardRef(({ pageData, startSlot, pageIndex = 0 }, ref) => {
             filename={filename || null}
             caption={captions[i]}
             slotNumber={startSlot + i}
+            onPhotoClick={onPhotoClick}
           />
         ))}
       </div>

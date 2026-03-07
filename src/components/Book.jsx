@@ -1,7 +1,8 @@
 import HTMLFlipBook from 'react-pageflip'
-import { forwardRef, useRef } from 'react'
+import { forwardRef, useRef, useState, useCallback } from 'react'
 import Cover from './Cover'
 import Page from './Page'
+import PhotoModal from './PhotoModal'
 import pages from '../data/pages.json'
 import './Book.css'
 
@@ -12,6 +13,9 @@ EndPaper.displayName = 'EndPaper'
 
 export default function Book() {
   const bookRef = useRef()
+  const [modalPhoto, setModalPhoto] = useState(null)
+  const onPhotoClick = useCallback((filename, caption) => setModalPhoto({ filename, caption }), [])
+  const closeModal = useCallback(() => setModalPhoto(null), [])
 
   let slot = 1
   const pageSlots = pages.map(page => {
@@ -71,7 +75,7 @@ export default function Book() {
           />
 
           {pages.map((pageData, i) => (
-            <Page key={i} pageData={pageData} startSlot={pageSlots[i]} pageIndex={i} />
+            <Page key={i} pageData={pageData} startSlot={pageSlots[i]} pageIndex={i} onPhotoClick={onPhotoClick} />
           ))}
 
           <Cover type="back" title="" subtitle="" />
@@ -83,6 +87,14 @@ export default function Book() {
         <button className="nav-btn nav-prev" onClick={onPrev}>← Prev</button>
         <button className="nav-btn nav-next" onClick={onNext}>Next →</button>
       </nav>
+
+      {modalPhoto && (
+        <PhotoModal
+          filename={modalPhoto.filename}
+          caption={modalPhoto.caption}
+          onClose={closeModal}
+        />
+      )}
     </div>
   )
 }
