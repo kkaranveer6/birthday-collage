@@ -20,7 +20,7 @@ const positions = pages.map((page, i) => {
   // Serpentine: even rows go left-to-right, odd rows go right-to-left
   const effectiveCol = row % 2 === 0 ? col : (COLS - 1 - col)
 
-  const xBase = 5 + effectiveCol * (75 / (COLS - 1))  // 5% – 80%
+  const xBase = 3 + effectiveCol * (60 / (COLS - 1))  // 3% – 63%
   const yBase = 5 + row * (85 / (ROWS - 1))            // 5% – 90%
 
   // Small jitter to preserve the scattered feel

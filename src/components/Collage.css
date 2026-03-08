@@ -1,8 +1,8 @@
 /* src/components/Collage.css */
 .collage-canvas {
   position: relative;
-  width: 200vw;
-  height: 400vh;
+  width: 100vw;
+  height: 200vh;
   /* warm linen background */
   background-color: #f5f0e8;
   background-image:
