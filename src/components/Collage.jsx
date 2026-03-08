@@ -11,12 +11,29 @@ function seededRand(seed, min, max) {
   return min + (x - Math.floor(x)) * (max - min)
 }
 
-const positions = pages.map((page, i) => ({
-  filename: page.images[0],
-  leftPct: seededRand(i * 3,     4, 80),
-  topPct:  seededRand(i * 3 + 1, 2, 95),
-  rot:     seededRand(i * 3 + 2, -15, 15),
-}))
+const COLS = 5
+const ROWS = Math.ceil(pages.length / COLS) // 6 rows for 26 photos
+
+const positions = pages.map((page, i) => {
+  const row = Math.floor(i / COLS)
+  const col = i % COLS
+  // Serpentine: even rows go left-to-right, odd rows go right-to-left
+  const effectiveCol = row % 2 === 0 ? col : (COLS - 1 - col)
+
+  const xBase = 5 + effectiveCol * (75 / (COLS - 1))  // 5% – 80%
+  const yBase = 5 + row * (85 / (ROWS - 1))            // 5% – 90%
+
+  // Small jitter to preserve the scattered feel
+  const xJitter = seededRand(2000 + i * 2,     -5, 5)
+  const yJitter = seededRand(2001 + i * 2, -3, 3)
+
+  return {
+    filename: page.images[0],
+    leftPct: xBase + xJitter,
+    topPct:  yBase + yJitter,
+    rot:     seededRand(i * 3 + 2, -15, 15),
+  }
+})
 
 export default function Collage() {
   const [modal, setModal] = useState(null)
