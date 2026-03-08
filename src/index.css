@@ -5,45 +5,11 @@
 body {
   margin: 0;
   min-height: 100vh;
-  /* Warm wood grain desk */
-  background-color: #8B6B35;
-  background-image:
-    repeating-linear-gradient(
-      91deg,
-      transparent 0px, transparent 28px,
-      rgba(0,0,0,0.045) 28px, rgba(0,0,0,0.045) 29px,
-      transparent 29px, transparent 58px,
-      rgba(255,255,255,0.025) 58px, rgba(255,255,255,0.025) 59px
-    ),
-    repeating-linear-gradient(
-      89deg,
-      transparent 0px, transparent 42px,
-      rgba(0,0,0,0.03) 42px, rgba(0,0,0,0.03) 43px
-    ),
-    repeating-linear-gradient(
-      180deg,
-      transparent 0px, transparent 12px,
-      rgba(0,0,0,0.02) 12px, rgba(0,0,0,0.02) 13px
-    ),
-    linear-gradient(
-      168deg,
-      #A8784A 0%,
-      #8B6130 18%,
-      #7A5328 36%,
-      #9A7040 52%,
-      #7A5328 68%,
-      #8B6130 84%,
-      #A8784A 100%
-    );
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background: #3a3a3a;
   font-family: 'Caveat', cursive;
+  overflow-x: hidden;
 }
 
 #root {
   width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }

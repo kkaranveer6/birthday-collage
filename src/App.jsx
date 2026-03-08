@@ -1,5 +1,5 @@
-import Book from './components/Book'
+import Collage from './components/Collage'
 
 export default function App() {
-  return <Book />
+  return <Collage />
 }
