@@ -35,7 +35,7 @@ export default function TimelineLine({ positions = [] }) {
     const onScroll = () => {
       const scrolled = window.scrollY
       const total = document.documentElement.scrollHeight - window.innerHeight
-      const progress = total > 0 ? scrolled / total : 0
+      const progress = total > 0 ? Math.min(scrolled / (total * 0.6), 1) : 0
       path.style.strokeDashoffset = totalLength * (1 - progress)
     }
 
