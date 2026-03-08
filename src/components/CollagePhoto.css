@@ -6,10 +6,11 @@
   cursor: pointer;
   transition: transform 0.15s ease, box-shadow 0.15s ease;
   z-index: 1;
+  transform: var(--rotation, rotate(0deg));
 }
 
 .collage-photo:hover {
-  transform: scale(1.06) !important;
+  transform: var(--rotation, rotate(0deg)) scale(1.06);
   box-shadow: 4px 8px 24px rgba(0, 0, 0, 0.5);
   z-index: 100;
 }
