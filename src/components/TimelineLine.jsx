@@ -21,7 +21,7 @@ function buildPath(positions) {
   return d
 }
 
-export default function TimelineLine({ positions }) {
+export default function TimelineLine({ positions = [] }) {
   const pathRef = useRef()
 
   useEffect(() => {
@@ -42,7 +42,7 @@ export default function TimelineLine({ positions }) {
     window.addEventListener('scroll', onScroll, { passive: true })
     onScroll()
     return () => window.removeEventListener('scroll', onScroll)
-  }, [])
+  }, [positions])
 
   const d = buildPath(positions)
 

@@ -32,4 +32,11 @@ describe('TimelineLine', () => {
     const d = document.querySelector('path')?.getAttribute('d') ?? ''
     expect(d).toBe('')
   })
+
+  it('renders a bare M command with no Q segments for a single position', () => {
+    render(<TimelineLine positions={makePositions(1)} />)
+    const d = document.querySelector('path').getAttribute('d')
+    expect(d).toMatch(/^M/)
+    expect((d.match(/Q/g) || []).length).toBe(0)
+  })
 })
