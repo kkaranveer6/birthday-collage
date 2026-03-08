@@ -1,0 +1,22 @@
+import { render, screen, fireEvent } from '@testing-library/react'
+import CollagePhoto from '../components/CollagePhoto'
+
+describe('CollagePhoto', () => {
+  const defaultProps = {
+    filename: '01.jpg',
+    style: { left: '100px', top: '200px', transform: 'rotate(5deg)' },
+    onClick: vi.fn(),
+  }
+
+  it('renders an img with the correct src', () => {
+    render(<CollagePhoto {...defaultProps} />)
+    expect(screen.getByRole('img')).toHaveAttribute('src', '/images/01.jpg')
+  })
+
+  it('calls onClick when clicked', () => {
+    const onClick = vi.fn()
+    render(<CollagePhoto {...defaultProps} onClick={onClick} />)
+    fireEvent.click(screen.getByRole('img').closest('.collage-photo'))
+    expect(onClick).toHaveBeenCalledWith('01.jpg')
+  })
+})

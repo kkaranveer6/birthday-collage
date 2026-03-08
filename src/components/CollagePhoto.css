@@ -1,0 +1,22 @@
+.collage-photo {
+  position: absolute;
+  background: #fff;
+  padding: 10px 10px 36px;
+  box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.35);
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  z-index: 1;
+}
+
+.collage-photo:hover {
+  transform: scale(1.06) !important;
+  box-shadow: 4px 8px 24px rgba(0, 0, 0, 0.5);
+  z-index: 100;
+}
+
+.collage-photo__img {
+  display: block;
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+}
