@@ -12,7 +12,15 @@
 .timeline-path {
   fill: none;
   stroke: #c0392b;
-  stroke-width: 6;
+  stroke-width: 3;
   stroke-linecap: round;
   stroke-linejoin: round;
+  stroke-dasharray: 7 14;
+  animation: march 1.2s linear infinite;
+}
+
+@keyframes march {
+  to {
+    stroke-dashoffset: -21;
+  }
 }

@@ -1,5 +1,4 @@
 // src/components/TimelineLine.jsx
-import { useEffect, useRef } from 'react'
 import './TimelineLine.css'
 
 function seededRand(seed, min, max) {
@@ -22,28 +21,6 @@ function buildPath(positions) {
 }
 
 export default function TimelineLine({ positions = [] }) {
-  const pathRef = useRef()
-
-  useEffect(() => {
-    const path = pathRef.current
-    if (!path || typeof path.getTotalLength !== 'function') return
-
-    const totalLength = path.getTotalLength()
-    path.style.strokeDasharray = totalLength
-    path.style.strokeDashoffset = totalLength
-
-    const onScroll = () => {
-      const scrolled = window.scrollY
-      const total = document.documentElement.scrollHeight - window.innerHeight
-      const progress = total > 0 ? Math.min(scrolled / (total * 0.6), 1) : 0
-      path.style.strokeDashoffset = totalLength * (1 - progress)
-    }
-
-    window.addEventListener('scroll', onScroll, { passive: true })
-    onScroll()
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [positions])
-
   const d = buildPath(positions)
 
   return (
@@ -53,7 +30,6 @@ export default function TimelineLine({ positions = [] }) {
       preserveAspectRatio="none"
     >
       <path
-        ref={pathRef}
         d={d}
         className="timeline-path"
         vectorEffect="non-scaling-stroke"
