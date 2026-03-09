@@ -24,3 +24,53 @@
     stroke-dashoffset: -21;
   }
 }
+
+.timeline-start-dot {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #c0392b;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.timeline-end-dot {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #c0392b;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.timeline-end-ring {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  overflow: visible;
+}
+
+.timeline-end-ring circle {
+  fill: none;
+  stroke: #c0392b;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 7 14;
+  animation: march 1.2s linear infinite;
+}
+
+.timeline-start-label {
+  position: absolute;
+  color: #c0392b;
+  font-family: 'Caveat', cursive;
+  font-size: 25px;
+  font-weight: 700;
+  line-height: 1;
+  transform: translate(8px, -50%);
+  pointer-events: none;
+  white-space: nowrap;
+}
