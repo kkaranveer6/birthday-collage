@@ -10,7 +10,7 @@ describe('CollagePhoto', () => {
 
   it('renders an img with the correct src', () => {
     render(<CollagePhoto {...defaultProps} />)
-    expect(screen.getByRole('img')).toHaveAttribute('src', '/images/01.jpg')
+    expect(screen.getByRole('img')).toHaveAttribute('src', '/images/edited/01.jpg')
   })
 
   it('calls onClick when clicked', () => {
