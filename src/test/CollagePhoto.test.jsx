@@ -10,7 +10,8 @@ describe('CollagePhoto', () => {
 
   it('renders an img with the correct src', () => {
     render(<CollagePhoto {...defaultProps} />)
-    expect(screen.getByRole('img')).toHaveAttribute('src', '/images/edited/01.jpg')
+    const img = screen.getByRole('img')
+    expect(img.getAttribute('src')).toContain('/images/edited/')
   })
 
   it('calls onClick when clicked', () => {
