@@ -33,5 +33,6 @@ describe('CollagePhoto', () => {
     )
     fireEvent.click(screen.getByRole('img').closest('.collage-photo'))
     expect(onBurst).toHaveBeenCalledOnce()
+    expect(onBurst).toHaveBeenCalledWith(expect.objectContaining({ type: 'click' }))
   })
 })
