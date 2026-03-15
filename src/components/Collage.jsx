@@ -35,7 +35,7 @@ const positions = pages.map((page, i) => {
   }
 })
 
-export default function Collage() {
+export default function Collage({ onBurst }) {
   const [modal, setModal] = useState(null)
 
   return (
@@ -51,6 +51,7 @@ export default function Collage() {
             transform: `rotate(${rot}deg)`,
           }}
           onClick={(f) => setModal({ filename: f })}
+          onBurst={onBurst}
         />
       ))}
       {modal && (
@@ -58,6 +59,7 @@ export default function Collage() {
           filename={modal.filename}
           caption=""
           onClose={() => setModal(null)}
+          onBurst={onBurst}
         />
       )}
     </div>

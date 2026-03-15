@@ -20,4 +20,18 @@ describe('CollagePhoto', () => {
     fireEvent.click(screen.getByRole('img').closest('.collage-photo'))
     expect(onClick).toHaveBeenCalledWith('01.jpg')
   })
+
+  test('calls onBurst with click event when photo is clicked', () => {
+    const onBurst = vi.fn()
+    render(
+      <CollagePhoto
+        filename="01.jpg"
+        style={{}}
+        onClick={() => {}}
+        onBurst={onBurst}
+      />
+    )
+    fireEvent.click(screen.getByRole('img').closest('.collage-photo'))
+    expect(onBurst).toHaveBeenCalledOnce()
+  })
 })
