@@ -12,7 +12,7 @@ function seededRand(seed, min, max) {
 }
 
 const COLS = 5
-const ROWS = Math.ceil(pages.length / COLS) // 6 rows for 26 photos
+const ROWS = Math.ceil(pages.length / COLS)
 
 const positions = pages.map((page, i) => {
   const row = Math.floor(i / COLS)
@@ -20,8 +20,8 @@ const positions = pages.map((page, i) => {
   // Serpentine: even rows go left-to-right, odd rows go right-to-left
   const effectiveCol = row % 2 === 0 ? col : (COLS - 1 - col)
 
-  const xBase = 3 + effectiveCol * (60 / (COLS - 1))  // 3% – 63%
-  const yBase = 5 + row * (85 / (ROWS - 1))            // 5% – 90%
+  const xBase = 6 + effectiveCol * (76 / (COLS - 1))  // 6% – 82%
+  const yBase = 8 + row * (74 / (ROWS - 1))            // 8% – 82%
 
   // Small jitter to preserve the scattered feel
   const xJitter = seededRand(2000 + i * 2,     -5, 5)
