@@ -19,3 +19,12 @@ test('calls onDone with id after 900ms', () => {
   expect(onDone).toHaveBeenCalledOnce()
   expect(onDone).toHaveBeenCalledWith('abc')
 })
+
+test('does not call onDone if unmounted before 900ms', () => {
+  const onDone = vi.fn()
+  const { unmount } = render(<HeartBurst id="abc" x={100} y={200} onDone={onDone} />)
+  act(() => vi.advanceTimersByTime(500))
+  unmount()
+  act(() => vi.advanceTimersByTime(500))
+  expect(onDone).not.toHaveBeenCalled()
+})

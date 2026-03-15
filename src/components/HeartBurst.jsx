@@ -13,10 +13,13 @@ export default function HeartBurst({ id, x, y, onDone }) {
     }))
   )
 
+  const onDoneRef = useRef(onDone)
+  onDoneRef.current = onDone
+
   useEffect(() => {
-    const timer = setTimeout(() => onDone(id), 900)
+    const timer = setTimeout(() => onDoneRef.current(id), 900)
     return () => clearTimeout(timer)
-  }, [id, onDone])
+  }, [id])
 
   return (
     <>
@@ -25,8 +28,8 @@ export default function HeartBurst({ id, x, y, onDone }) {
           key={angle}
           className="heart-burst__heart"
           style={{
-            left: x,
-            top: y,
+            left: `${x}px`,
+            top: `${y}px`,
             '--angle': `${angle}deg`,
             '--dist': dist,
           }}
