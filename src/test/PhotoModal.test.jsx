@@ -45,3 +45,10 @@ test('does NOT call onBurst when overlay backdrop is clicked', () => {
   fireEvent.click(document.querySelector('.modal-overlay'))
   expect(onBurst).not.toHaveBeenCalled()
 })
+
+test('calls onClose when close button is clicked', () => {
+  const onClose = vi.fn()
+  render(<PhotoModal filename="01.jpg" caption="" onClose={onClose} />)
+  fireEvent.click(screen.getByRole('button', { name: /close/i }))
+  expect(onClose).toHaveBeenCalledOnce()
+})
