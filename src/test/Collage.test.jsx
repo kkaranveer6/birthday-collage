@@ -2,9 +2,9 @@ import { render, screen, fireEvent } from '@testing-library/react'
 import Collage from '../components/Collage'
 
 describe('Collage', () => {
-  it('renders all 26 photos', () => {
+  it('renders all 50 photos', () => {
     render(<Collage />)
-    expect(screen.getAllByRole('img').length).toBe(26)
+    expect(screen.getAllByRole('img').length).toBe(50)
   })
 
   it('opens modal when a photo is clicked', () => {
