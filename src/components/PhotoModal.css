@@ -37,6 +37,7 @@
   width: 100%;
   max-height: 70vh;
   object-fit: contain;
+  transition: opacity 0.15s ease;
 }
 
 .modal-caption {
@@ -74,4 +75,37 @@
 
 .modal-close:hover {
   transform: scale(1.15) rotate(10deg);
+}
+
+.modal-rotate {
+  position: absolute;
+  bottom: -14px;
+  left: -14px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: #FEF6E4;
+  color: #5a3e2b;
+  font-size: 1.2rem;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.15s ease;
+}
+
+.modal-rotate:hover {
+  transform: scale(1.15) rotate(30deg);
+}
+
+.modal-rotate:active {
+  animation: rotate-spin 0.3s ease;
+}
+
+@keyframes rotate-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
 }
