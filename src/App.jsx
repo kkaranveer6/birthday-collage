@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Collage from './components/Collage'
 import HeartBurst from './components/HeartBurst'
+import BirthdayHero from './components/BirthdayHero'
 
 export default function App() {
   const [bursts, setBursts] = useState([])
@@ -16,6 +17,7 @@ export default function App() {
 
   return (
     <>
+      <BirthdayHero />
       <Collage onBurst={addBurst} />
       {bursts.map((b) => (
         <HeartBurst key={b.id} {...b} onDone={removeBurst} />
