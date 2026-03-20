@@ -37,9 +37,14 @@ describe('Collage', () => {
     expect(document.querySelector('.modal-overlay')).toBeNull()
   })
 
-  it('renders 35 photos on mobile layout', () => {
+  it('renders 35 photos on mobile layout with 2-column positions', () => {
     mockMatchMedia(true) // simulate mobile
     render(<Collage />)
     expect(screen.getAllByRole('img').length).toBe(35)
+    // In the 2-column layout, max left position is ~62% (60% base + 2% jitter)
+    // In the 5-column layout it goes to ~87% (82% base + 5% jitter)
+    const photos = document.querySelectorAll('.collage-photo')
+    const leftValues = [...photos].map(p => parseFloat(p.style.left))
+    expect(Math.max(...leftValues)).toBeLessThan(65)
   })
 })

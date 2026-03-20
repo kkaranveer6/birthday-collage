@@ -27,6 +27,8 @@ function useIsMobile(breakpoint = 640) {
 function computePositions(isMobile) {
   const COLS = isMobile ? 2 : 5
   const ROWS = Math.ceil(pages.length / COLS)
+  // Mobile: hardcoded 50 instead of gap-based 76/(COLS-1)=76 to keep photos
+  // within safe viewport bounds (right col: 60% + 2% jitter + 120px photo ≤ 375px)
   const xSpread = isMobile ? 50 : 76 / (COLS - 1)
   const xBase0  = isMobile ? 10 : 6
   const xJitter = isMobile ? 2 : 5   // max % jitter on x-axis
@@ -54,7 +56,7 @@ export default function Collage({ onBurst }) {
   const positions = computePositions(isMobile)
 
   const photoOffsetX = isMobile
-    ? 70 / window.innerWidth * 100
+    ? 70 / (window.innerWidth || 390) * 100
     : 5.5
   const photoOffsetY = 6
 
