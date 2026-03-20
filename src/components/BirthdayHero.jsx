@@ -15,8 +15,10 @@ export default function BirthdayHero() {
         tabIndex={0}
         onClick={() => document.getElementById('collage')?.scrollIntoView({ behavior: 'smooth' })}
         onKeyDown={(e) => {
-          if (e.key === 'Enter' || e.key === ' ')
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault()
             document.getElementById('collage')?.scrollIntoView({ behavior: 'smooth' })
+          }
         }}
       >
         scroll down for some memories ↓
