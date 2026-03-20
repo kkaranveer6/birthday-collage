@@ -50,3 +50,10 @@
   white-space: nowrap;
   cursor: pointer;
 }
+
+@media (max-width: 640px) {
+  .birthday-hero__scroll-hint {
+    white-space: normal;
+    text-align: center;
+  }
+}
