@@ -9,7 +9,18 @@ export default function BirthdayHero() {
         <p className="birthday-hero__headline">Happy Birthday,</p>
         <p className="birthday-hero__name">Dipu! 🎂</p>
       </div>
-      <p className="birthday-hero__scroll-hint">scroll down for some memories ↓</p>
+      <p
+        className="birthday-hero__scroll-hint"
+        role="button"
+        tabIndex={0}
+        onClick={() => document.getElementById('collage')?.scrollIntoView({ behavior: 'smooth' })}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ')
+            document.getElementById('collage')?.scrollIntoView({ behavior: 'smooth' })
+        }}
+      >
+        scroll down for some memories ↓
+      </p>
     </section>
   )
 }

@@ -39,7 +39,7 @@ export default function Collage({ onBurst }) {
   const [modal, setModal] = useState(null)
 
   return (
-    <div className="collage-canvas">
+    <div id="collage" className="collage-canvas">
       <TimelineLine positions={positions} />
       {positions.map(({ filename, leftPct, topPct, rot }) => (
         <CollagePhoto

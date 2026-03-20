@@ -48,4 +48,5 @@
   font-style: italic;
   color: #999;
   white-space: nowrap;
+  cursor: pointer;
 }
