@@ -1,5 +1,5 @@
 // src/components/Collage.jsx
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import pages from '../data/pages.json'
 import CollagePhoto from './CollagePhoto'
 import PhotoModal from './PhotoModal'
@@ -11,36 +11,60 @@ function seededRand(seed, min, max) {
   return min + (x - Math.floor(x)) * (max - min)
 }
 
-const COLS = 5
-const ROWS = Math.ceil(pages.length / COLS)
+function useIsMobile(breakpoint = 640) {
+  const [isMobile, setIsMobile] = useState(
+    () => window.matchMedia(`(max-width: ${breakpoint}px)`).matches
+  )
+  useEffect(() => {
+    const mq = window.matchMedia(`(max-width: ${breakpoint}px)`)
+    const handler = (e) => setIsMobile(e.matches)
+    mq.addEventListener('change', handler)
+    return () => mq.removeEventListener('change', handler)
+  }, [breakpoint])
+  return isMobile
+}
 
-const positions = pages.map((page, i) => {
-  const row = Math.floor(i / COLS)
-  const col = i % COLS
-  // Serpentine: even rows go left-to-right, odd rows go right-to-left
-  const effectiveCol = row % 2 === 0 ? col : (COLS - 1 - col)
+function computePositions(isMobile) {
+  const COLS = isMobile ? 2 : 5
+  const ROWS = Math.ceil(pages.length / COLS)
+  const xSpread = isMobile ? 50 : 76 / (COLS - 1)
+  const xBase0  = isMobile ? 10 : 6
+  const xJitter = isMobile ? 2 : 5   // max % jitter on x-axis
 
-  const xBase = 6 + effectiveCol * (76 / (COLS - 1))  // 6% – 82%
-  const yBase = 8 + row * (74 / (ROWS - 1))            // 8% – 82%
+  return pages.map((page, i) => {
+    const row = Math.floor(i / COLS)
+    const col = i % COLS
+    const effectiveCol = row % 2 === 0 ? col : (COLS - 1 - col)
 
-  // Small jitter to preserve the scattered feel
-  const xJitter = seededRand(2000 + i * 2,     -5, 5)
-  const yJitter = seededRand(2001 + i * 2, -3, 3)
+    const xBase = xBase0 + effectiveCol * xSpread
+    const yBase = 8 + row * (74 / (ROWS - 1))
 
-  return {
-    filename: page.images[0],
-    leftPct: xBase + xJitter,
-    topPct:  yBase + yJitter,
-    rot:     seededRand(i * 3 + 2, -15, 15),
-  }
-})
+    return {
+      filename: page.images[0],
+      leftPct: xBase + seededRand(2000 + i * 2, -xJitter, xJitter),
+      topPct:  yBase + seededRand(2001 + i * 2, -3, 3),
+      rot:     seededRand(i * 3 + 2, -15, 15),
+    }
+  })
+}
 
 export default function Collage({ onBurst }) {
   const [modal, setModal] = useState(null)
+  const isMobile = useIsMobile()
+  const positions = computePositions(isMobile)
+
+  const photoOffsetX = isMobile
+    ? 70 / window.innerWidth * 100
+    : 5.5
+  const photoOffsetY = 6
 
   return (
     <div id="collage" className="collage-canvas">
-      <TimelineLine positions={positions} />
+      <TimelineLine
+        positions={positions}
+        photoOffsetX={photoOffsetX}
+        photoOffsetY={photoOffsetY}
+      />
       {positions.map(({ filename, leftPct, topPct, rot }) => (
         <CollagePhoto
           key={filename}
