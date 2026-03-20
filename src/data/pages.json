@@ -33,20 +33,5 @@
   { "layout": "single", "images": ["32.jpg"], "captions": [""] },
   { "layout": "single", "images": ["33.jpg"], "captions": [""] },
   { "layout": "single", "images": ["34.jpg"], "captions": [""] },
-  { "layout": "single", "images": ["35.jpg"], "captions": [""] },
-  { "layout": "single", "images": ["36.jpg"], "captions": [""] },
-  { "layout": "single", "images": ["37.jpg"], "captions": [""] },
-  { "layout": "single", "images": ["38.jpg"], "captions": [""] },
-  { "layout": "single", "images": ["39.jpg"], "captions": [""] },
-  { "layout": "single", "images": ["40.jpg"], "captions": [""] },
-  { "layout": "single", "images": ["41.jpg"], "captions": [""] },
-  { "layout": "single", "images": ["42.jpg"], "captions": [""] },
-  { "layout": "single", "images": ["43.jpg"], "captions": [""] },
-  { "layout": "single", "images": ["44.jpg"], "captions": [""] },
-  { "layout": "single", "images": ["45.jpg"], "captions": [""] },
-  { "layout": "single", "images": ["46.jpg"], "captions": [""] },
-  { "layout": "single", "images": ["47.jpg"], "captions": [""] },
-  { "layout": "single", "images": ["48.jpg"], "captions": [""] },
-  { "layout": "single", "images": ["49.jpg"], "captions": [""] },
-  { "layout": "single", "images": ["50.jpg"], "captions": [""] }
+  { "layout": "single", "images": ["35.jpg"], "captions": [""] }
 ]
