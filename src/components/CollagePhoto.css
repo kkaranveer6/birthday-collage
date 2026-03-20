@@ -21,3 +21,10 @@
   height: 200px;
   object-fit: cover;
 }
+
+@media (max-width: 640px) {
+  .collage-photo__img {
+    width: 120px;
+    height: 120px;
+  }
+}
