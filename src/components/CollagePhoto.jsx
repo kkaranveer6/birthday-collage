@@ -9,7 +9,7 @@ export default function CollagePhoto({ filename, style, onClick, onBurst }) {
       style={{ ...restStyle, '--rotation': transform || 'rotate(0deg)' }}
       onClick={(e) => { onBurst?.(e); onClick?.(filename) }}
     >
-      <img src={`/images/edited/${filename}`} alt={filename} className="collage-photo__img" />
+      <img src={`${import.meta.env.BASE_URL}images/edited/${filename}`} alt={filename} className="collage-photo__img" />
     </div>
   )
 }

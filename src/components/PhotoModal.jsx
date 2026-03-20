@@ -13,8 +13,8 @@ export default function PhotoModal({ filename, caption, onClose, onBurst }) {
   }, [onClose])
 
   const imgSrc = showOriginal
-    ? `/images/original/${filename}`
-    : `/images/edited/${filename}`
+    ? `${import.meta.env.BASE_URL}images/original/${filename}`
+    : `${import.meta.env.BASE_URL}images/edited/${filename}`
 
   return (
     <div className="modal-overlay" onClick={onClose}>
