@@ -6,10 +6,10 @@ function seededRand(seed, min, max) {
   return min + (x - Math.floor(x)) * (max - min)
 }
 
-function buildPath(start, positions, end) {
+function buildPath(start, positions, end, offsetX, offsetY) {
   if (positions.length === 0) return ''
   // Approximate photo center: card is ~11% wide, ~12% tall in viewBox units
-  const pts = positions.map((p) => ({ x: p.leftPct + 5.5, y: p.topPct + 6 }))
+  const pts = positions.map((p) => ({ x: p.leftPct + offsetX, y: p.topPct + offsetY }))
   let d = `M ${start.x} ${start.y} L ${pts[0].x} ${pts[0].y}`
   for (let i = 1; i < pts.length; i++) {
     // Midpoint control point with seeded wobble
@@ -21,11 +21,11 @@ function buildPath(start, positions, end) {
   return d
 }
 
-export default function TimelineLine({ positions = [] }) {
+export default function TimelineLine({ positions = [], photoOffsetX = 5.5, photoOffsetY = 6 }) {
   if (positions.length === 0) return null
 
-  const firstCenter = { x: positions[0].leftPct + 5.5, y: positions[0].topPct + 6 }
-  const lastCenter  = { x: positions[positions.length - 1].leftPct + 5.5, y: positions[positions.length - 1].topPct + 6 }
+  const firstCenter = { x: positions[0].leftPct + photoOffsetX, y: positions[0].topPct + photoOffsetY }
+  const lastCenter  = { x: positions[positions.length - 1].leftPct + photoOffsetX, y: positions[positions.length - 1].topPct + photoOffsetY }
   // Start dot sits 8 viewBox units above the first photo center
   const startDot = { x: firstCenter.x, y: firstCenter.y - 8 }
   // End dot sits 8 viewBox units below the last photo center
@@ -36,7 +36,7 @@ export default function TimelineLine({ positions = [] }) {
   const ringRadiusVB = 9 / (3.5 * window.innerHeight / 100)
   const pathEnd = { x: endDot.x, y: endDot.y - ringRadiusVB }
 
-  const d = buildPath(startDot, positions, pathEnd)
+  const d = buildPath(startDot, positions, pathEnd, photoOffsetX, photoOffsetY)
 
   return (
     <>

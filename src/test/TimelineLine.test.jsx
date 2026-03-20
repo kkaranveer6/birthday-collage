@@ -39,4 +39,20 @@ describe('TimelineLine', () => {
     expect(d).toMatch(/^M/)
     expect((d.match(/Q/g) || []).length).toBe(0)
   })
+
+  it('uses photoOffsetX and photoOffsetY when building the path', () => {
+    // With position at (0,0) and offsets (10, 12):
+    //   photoCenter = { x: 10, y: 12 }
+    //   startDot    = { x: 10, y: 4  }  (12 - 8)
+    //   path starts: "M 10 4 ..."
+    render(
+      <TimelineLine
+        positions={[{ leftPct: 0, topPct: 0 }]}
+        photoOffsetX={10}
+        photoOffsetY={12}
+      />
+    )
+    const d = document.querySelector('path').getAttribute('d')
+    expect(d).toMatch(/^M 10 4/)
+  })
 })
